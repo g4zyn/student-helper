@@ -7,4 +7,6 @@ interface ScheduleRepository {
 
     fun getSchedule(): Observable<List<Lecture>>
 
+//    fun getLecture(name: String): Observable<Lecture>
+
 }

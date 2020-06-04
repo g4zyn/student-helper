@@ -11,18 +11,18 @@ class ScheduleRepositoryImpl(private val scheduleDataSource: ScheduleDataSource)
         return scheduleDataSource
             .getAll()
             .map {
-                it.data.map {
+                it.map {
                     Lecture(
                         it.name,
                         it.type,
                         it.professor,
                         it.groups,
+                        it.day,
                         it.time,
                         it.classroom
                     )
                 }
             }
     }
-
 
 }
