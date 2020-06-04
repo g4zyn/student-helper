@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class LectureResponse(
+data class CourseResponse(
     @Json(name = "predmet") val name: String,
     @Json(name = "tip") val type: String,
     @Json(name = "nastavnik") val professor: String,

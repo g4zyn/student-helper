@@ -5,11 +5,11 @@ import org.koin.dsl.module
 import rs.raf.projekat2.marko_gajin_RM8517.data.datasources.ScheduleDataSource
 import rs.raf.projekat2.marko_gajin_RM8517.data.repositories.ScheduleRepository
 import rs.raf.projekat2.marko_gajin_RM8517.data.repositories.ScheduleRepositoryImpl
-import rs.raf.projekat2.marko_gajin_RM8517.presentation.viewmodels.ScheduleViewModel
+import rs.raf.projekat2.marko_gajin_RM8517.presentation.viewmodels.MainViewModel
 
 val scheduleModule = module {
 
-    viewModel { ScheduleViewModel(get()) }
+    viewModel { MainViewModel(get()) }
 
     single<ScheduleRepository> { ScheduleRepositoryImpl(get()) }
 

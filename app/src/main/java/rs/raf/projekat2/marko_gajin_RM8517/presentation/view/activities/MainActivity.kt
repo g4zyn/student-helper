@@ -6,12 +6,12 @@ import androidx.lifecycle.Observer
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.raf.projekat2.marko_gajin_RM8517.R
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.contracts.ScheduleContract
-import rs.raf.projekat2.marko_gajin_RM8517.presentation.viewmodels.ScheduleViewModel
+import rs.raf.projekat2.marko_gajin_RM8517.presentation.viewmodels.MainViewModel
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private val scheduleViewModel: ScheduleContract.ViewModel by viewModel<ScheduleViewModel>()
+    private val scheduleViewModel: ScheduleContract.ViewModel by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
