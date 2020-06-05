@@ -5,25 +5,23 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import rs.raf.projekat2.marko_gajin_RM8517.data.models.entity.LectureEntity
-import rs.raf.projekat2.marko_gajin_RM8517.data.models.ui.Course
+import rs.raf.projekat2.marko_gajin_RM8517.data.models.LectureEntity
+import rs.raf.projekat2.marko_gajin_RM8517.data.models.Lecture
 import rs.raf.projekat2.marko_gajin_RM8517.data.repositories.LectureRepository
-import rs.raf.projekat2.marko_gajin_RM8517.data.repositories.ScheduleRepository
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.contracts.MainContract
 import timber.log.Timber
 
 class MainViewModel(
-    private val scheduleRepository: ScheduleRepository,
     private val lectureRepository: LectureRepository
 ): ViewModel(), MainContract.ViewModel {
 
-    override val schedule: MutableLiveData<List<Course>> = MutableLiveData()
+    override val schedule: MutableLiveData<List<Lecture>> = MutableLiveData()
 
     private val subscriptions = CompositeDisposable()
 
-    override fun getSchedule() {
-        val subscription = scheduleRepository
-            .getSchedule()
+    override fun fetchLectures() {
+        val subscription = lectureRepository
+            .fetchAll()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -53,7 +51,7 @@ class MainViewModel(
         subscriptions.add(subscription)
     }
 
-    override fun getAllLectures() {
+    override fun getLectures() {
         val subscription = lectureRepository
             .getAll()
             .subscribeOn(Schedulers.io())

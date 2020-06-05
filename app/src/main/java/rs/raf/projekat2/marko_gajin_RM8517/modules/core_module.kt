@@ -15,7 +15,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import rs.raf.projekat2.marko_gajin_RM8517.data.db.ScheduleDatabase
+import rs.raf.projekat2.marko_gajin_RM8517.data.datasources.local.LectureDatabase
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -25,7 +25,7 @@ val coreModule = module {
         androidApplication().getSharedPreferences(androidApplication().packageName, Context.MODE_PRIVATE)
     }
 
-    single { Room.databaseBuilder(androidContext(), ScheduleDatabase::class.java, "RAFdb")
+    single { Room.databaseBuilder(androidContext(), LectureDatabase::class.java, "RAFdb")
         .fallbackToDestructiveMigration()
         .build() }
 

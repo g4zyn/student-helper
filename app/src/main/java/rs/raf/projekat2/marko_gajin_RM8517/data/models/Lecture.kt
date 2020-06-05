@@ -1,6 +1,6 @@
-package rs.raf.projekat2.marko_gajin_RM8517.data.models.ui
+package rs.raf.projekat2.marko_gajin_RM8517.data.models
 
-data class Course(
+data class Lecture(
     val name: String,
     val type: String,
     val professor: String,
