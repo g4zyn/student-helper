@@ -1,19 +1,44 @@
 package rs.raf.projekat2.marko_gajin_RM8517.data.repositories
 
 import io.reactivex.Observable
-import io.reactivex.Single
 import rs.raf.projekat2.marko_gajin_RM8517.data.datasources.local.LectureDao
 import rs.raf.projekat2.marko_gajin_RM8517.data.datasources.remote.LectureService
 import rs.raf.projekat2.marko_gajin_RM8517.data.models.Lecture
 import rs.raf.projekat2.marko_gajin_RM8517.data.models.LectureEntity
+import rs.raf.projekat2.marko_gajin_RM8517.data.models.Resource
+import timber.log.Timber
 
 class LectureRepositoryImpl(
     private val localDataSource: LectureDao,
     private val remoteDataSource: LectureService
 ): LectureRepository {
 
-    override fun fetchAll(): Observable<List<Lecture>> {
+    override fun fetchAll(): Observable<Resource<Unit>> {
         return remoteDataSource
+            .getAll()
+            .doOnNext {
+                Timber.e("ADDING TO DATABASE")
+                val entities = it.map {
+                    LectureEntity(
+                        0,
+                        it.name,
+                        it.type,
+                        it.professor,
+                        it.groups,
+                        it.day,
+                        it.time,
+                        it.classroom
+                    )
+                }
+                localDataSource.deleteAndInsertAll(entities)
+            }
+            .map {
+                Resource.Success(Unit)
+            }
+    }
+
+    override fun getAll(): Observable<List<Lecture>> {
+        return localDataSource
             .getAll()
             .map {
                 it.map {
@@ -28,14 +53,6 @@ class LectureRepositoryImpl(
                     )
                 }
             }
-    }
-
-    override fun insertAll(lectureEntities: List<LectureEntity>): Single<List<Long>> {
-        return localDataSource.insertLectures(lectureEntities)
-    }
-
-    override fun getAll(): Observable<List<LectureEntity>> {
-        return localDataSource.getAll()
     }
 
 }

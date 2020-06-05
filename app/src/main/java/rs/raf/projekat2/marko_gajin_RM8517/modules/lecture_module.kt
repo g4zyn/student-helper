@@ -6,15 +6,15 @@ import rs.raf.projekat2.marko_gajin_RM8517.data.datasources.local.LectureDatabas
 import rs.raf.projekat2.marko_gajin_RM8517.data.datasources.remote.LectureService
 import rs.raf.projekat2.marko_gajin_RM8517.data.repositories.LectureRepository
 import rs.raf.projekat2.marko_gajin_RM8517.data.repositories.LectureRepositoryImpl
-import rs.raf.projekat2.marko_gajin_RM8517.presentation.viewmodels.MainViewModel
+import rs.raf.projekat2.marko_gajin_RM8517.presentation.viewmodels.LectureViewModel
 
 val lectureModule = module {
 
-    viewModel { MainViewModel(get()) }
+    viewModel { LectureViewModel(get()) }
 
     single<LectureRepository> { LectureRepositoryImpl(localDataSource = get(), remoteDataSource = get()) }
 
     single { get<LectureDatabase>().getLectureDao() }
 
-    single<LectureService> { create(get()) }
+    single<LectureService> { create(retrofit = get()) }
 }
