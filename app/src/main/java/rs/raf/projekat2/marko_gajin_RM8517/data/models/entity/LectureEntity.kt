@@ -10,7 +10,7 @@ data class LectureEntity(
     val name: String,
     val type: String,
     val professor: String,
-     val groups: String,
+    val groups: String,
     val day: String,
     val time: String,
     val classroom: String

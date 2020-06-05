@@ -10,7 +10,7 @@ import rs.raf.projekat2.marko_gajin_RM8517.data.models.entity.LectureEntity
     version = 1,
     exportSchema = false
 )
-abstract class Database: RoomDatabase() {
+abstract class ScheduleDatabase: RoomDatabase() {
 
     abstract fun getLectureDao(): LectureDao
 
