@@ -1,34 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filledTextField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/search"
+
+        app:startIconDrawable="@drawable/ic_baseline_search_24"
+        app:endIconMode="clear_text"
+
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            tools:ignore="MissingConstraints" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Spinner
         android:id="@+id/groupSpinner"
-        android:layout_width="180dp"
+        style="@style/SpinnerStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"
 
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filledTextField"
         app:layout_constraintBottom_toTopOf="@id/listRv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/daySpinner"
-    />
+        app:layout_constraintEnd_toStartOf="@id/daySpinner" />
 
     <Spinner
         android:id="@+id/daySpinner"
-        android:layout_width="180dp"
+        style="@style/SpinnerStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"
 
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filledTextField"
         app:layout_constraintBottom_toTopOf="@id/listRv"
         app:layout_constraintStart_toEndOf="@id/groupSpinner"
-        app:layout_constraintEnd_toEndOf="parent"
-    />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listRv"
@@ -37,32 +57,8 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/daySpinner"
-        app:layout_constraintBottom_toTopOf="@id/searchEt"
-        android:paddingTop="16dp"
-        android:clipToPadding="false"/>
-
-    <EditText
-        android:id="@+id/searchEt"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-
-        app:layout_constraintTop_toBottomOf="@id/viewPager"
+        app:layout_constraintTop_toBottomOf="@id/groupSpinner"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/searchBtn"
-    />
-
-    <Button
-        android:id="@+id/searchBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search"
-
-        app:layout_constraintTop_toBottomOf="@id/viewPager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/searchEt"
-        app:layout_constraintEnd_toEndOf="parent"
-    />
+        android:clipToPadding="false" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
