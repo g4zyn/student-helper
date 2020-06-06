@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/titleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Predmet-Tip"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/professorTv"
+    />
+
+    <TextView
+        android:id="@+id/professorTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Professor"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTv"
+        app:layout_constraintBottom_toTopOf="@id/classroomTv"
+    />
+
+    <TextView
+        android:id="@+id/classroomTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Classroom"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/professorTv"
+        app:layout_constraintBottom_toTopOf="@id/groupsTv"
+    />
+
+    <TextView
+        android:id="@+id/groupsTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Groups"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/classroomTv"
+        app:layout_constraintBottom_toBottomOf="parent"
+    />
+
+    <TextView
+        android:id="@+id/dayTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Day"
+
+        app:layout_constraintTop_toTopOf="@id/titleTv"
+        app:layout_constraintEnd_toEndOf="parent"
+    />
+
+    <TextView
+        android:id="@+id/timeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Time"
+
+        app:layout_constraintTop_toTopOf="@id/professorTv"
+        app:layout_constraintEnd_toEndOf="parent"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,6 +43,7 @@ class LectureRepositoryImpl(
             .map {
                 it.map {
                     Lecture(
+                        it.id,
                         it.name,
                         it.type,
                         it.professor,

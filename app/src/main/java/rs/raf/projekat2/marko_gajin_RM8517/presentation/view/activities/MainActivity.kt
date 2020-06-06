@@ -13,8 +13,6 @@ import timber.log.Timber
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private val lectureViewModel: LectureContract.ViewModel by viewModel<LectureViewModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
@@ -23,7 +21,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun init() {
         initViewPager()
         initNavigation()
-//        initObservers()
     }
 
     private fun initViewPager() {
@@ -46,15 +43,4 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             true
         }
     }
-
-    private fun initObservers() {
-
-        lectureViewModel.lecturesState.observe(this, Observer {
-            Timber.e(it.toString())
-        })
-
-        lectureViewModel.fetchLectures()
-        lectureViewModel.getLectures()
-    }
-
 }

@@ -12,7 +12,7 @@
         android:spinnerMode="dropdown"
 
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/viewPager"
+        app:layout_constraintBottom_toTopOf="@id/listRv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/daySpinner"
     />
@@ -25,20 +25,22 @@
         android:spinnerMode="dropdown"
 
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/viewPager"
+        app:layout_constraintBottom_toTopOf="@id/listRv"
         app:layout_constraintStart_toEndOf="@id/groupSpinner"
         app:layout_constraintEnd_toEndOf="parent"
     />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listRv"
         android:layout_width="0dp"
         android:layout_height="0dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/groupSpinner"
+        app:layout_constraintTop_toBottomOf="@id/daySpinner"
         app:layout_constraintBottom_toTopOf="@id/searchEt"
-    />
+        android:paddingTop="16dp"
+        android:clipToPadding="false"/>
 
     <EditText
         android:id="@+id/searchEt"
