@@ -27,4 +27,8 @@ class NoteRepositoryImpl(private val localDataSource: NoteDao) : NoteRepository 
 
         return localDataSource.insert(noteEntity)
     }
+
+    override fun delete(id: Long): Completable {
+        return localDataSource.delete(id)
+    }
 }

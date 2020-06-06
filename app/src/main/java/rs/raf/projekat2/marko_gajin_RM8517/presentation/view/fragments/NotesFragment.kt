@@ -38,7 +38,11 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     private fun initRecycler() {
         listRv.layoutManager = LinearLayoutManager(context)
-        adapter = NoteAdapter()
+        adapter = NoteAdapter(
+            {noteViewModel.deleteNote(it)},
+            {},
+            {}
+        )
         listRv.adapter = adapter
     }
 
@@ -49,9 +53,10 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
             renderState(it)
         })
         noteViewModel.getNotes()
-//        noteViewModel.addNote(
-//            Note(0, "Title", "Body")
-//        )
+
+        noteViewModel.addNote(
+            Note(0, "Title", "Body")
+        )
     }
 
     private fun renderState(state: NotesState) {

@@ -10,6 +10,7 @@ import rs.raf.projekat2.marko_gajin_RM8517.data.models.Note
 import rs.raf.projekat2.marko_gajin_RM8517.data.repositories.NoteRepository
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.contracts.NoteContract
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.AddNoteState
+import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.DeleteNoteState
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.NotesState
 import timber.log.Timber
 
@@ -20,6 +21,7 @@ class NoteViewModel(
     private val subscriptions = CompositeDisposable()
     override val notesState: MutableLiveData<NotesState> = MutableLiveData()
     override val addDone: MutableLiveData<AddNoteState> = MutableLiveData()
+    override val deleteDone: MutableLiveData<DeleteNoteState> = MutableLiveData()
 
     private val publishSubject: PublishSubject<String> = PublishSubject.create()
 
@@ -58,6 +60,23 @@ class NoteViewModel(
                 }
             )
             subscriptions.add(subscription)
+    }
+
+    override fun deleteNote(note: Note) {
+        val subscription = noteRepository
+            .delete(note.id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    deleteDone.value = DeleteNoteState.Success
+                },
+                {
+                    deleteDone.value = DeleteNoteState.Error("Error happened while deleting note")
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
     }
 
     override fun onCleared() {

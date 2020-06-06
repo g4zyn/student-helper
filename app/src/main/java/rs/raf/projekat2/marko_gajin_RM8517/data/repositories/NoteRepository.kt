@@ -9,6 +9,6 @@ interface NoteRepository {
     fun getAll(): Observable<List<Note>>
 //    TODO get filtered
     fun insert(note: Note): Completable
-
+    fun delete(id: Long): Completable
 
 }

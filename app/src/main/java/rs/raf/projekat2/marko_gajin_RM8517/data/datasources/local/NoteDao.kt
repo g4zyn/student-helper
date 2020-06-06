@@ -17,6 +17,9 @@ abstract class NoteDao {
     @Query("SELECT * FROM notes")
     abstract fun getAll(): Observable<List<NoteEntity>>
 
-//    TODO delete single & get filtered
+    @Query("DELETE FROM notes WHERE id == :id")
+    abstract fun delete(id: Long): Completable
+
+//    TODO get filtered & update
 
 }
