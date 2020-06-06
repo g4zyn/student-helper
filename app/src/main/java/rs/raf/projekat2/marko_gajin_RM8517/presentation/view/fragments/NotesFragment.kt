@@ -1,5 +1,6 @@
 package rs.raf.projekat2.marko_gajin_RM8517.presentation.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -11,6 +12,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import rs.raf.projekat2.marko_gajin_RM8517.R
 import rs.raf.projekat2.marko_gajin_RM8517.data.models.Note
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.contracts.NoteContract
+import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.activities.NewNoteActivity
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.recycler.adapters.NoteAdapter
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.NotesState
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.viewmodels.NoteViewModel
@@ -46,7 +48,12 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         listRv.adapter = adapter
     }
 
-    private fun initListeners() {}
+    private fun initListeners() {
+        addBtn.setOnClickListener {
+            val intent = Intent(context, NewNoteActivity::class.java)
+            startActivity(intent)
+        }
+    }
 
     private fun initObservers() {
         noteViewModel.notesState.observe(viewLifecycleOwner, Observer {

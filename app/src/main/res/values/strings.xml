@@ -4,4 +4,7 @@
     <string name="notes">NOTES</string>
     <string name="profile">PROFILE</string>
     <string name="search">SEARCH</string>
+    <string name="title">Title</string>
+    <string name="cancel">cancel</string>
+    <string name="done">done</string>
 </resources>

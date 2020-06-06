@@ -38,7 +38,7 @@ class NoteViewHolder(
 
     fun bind(note: Note) {
         titleTv.text = note.title
-        bodyTv.text = note.title
+        bodyTv.text = note.body
     }
 
 }
