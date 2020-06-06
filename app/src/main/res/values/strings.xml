@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">StudentHelper</string>
-    <string name="schedule">schedule</string>
-    <string name="notes">notes</string>
-    <string name="profile">profile</string>
-    <string name="search">search</string>
+    <string name="schedule">SCHEDULE</string>
+    <string name="notes">NOTES</string>
+    <string name="profile">PROFILE</string>
+    <string name="search">SEARCH</string>
 </resources>

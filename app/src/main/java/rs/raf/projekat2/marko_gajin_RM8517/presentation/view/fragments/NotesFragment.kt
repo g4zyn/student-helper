@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_notes.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import rs.raf.projekat2.marko_gajin_RM8517.R
+import rs.raf.projekat2.marko_gajin_RM8517.data.models.Note
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.contracts.NoteContract
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.recycler.adapters.NoteAdapter
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.NotesState
@@ -47,6 +48,10 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         noteViewModel.notesState.observe(viewLifecycleOwner, Observer {
             renderState(it)
         })
+        noteViewModel.getNotes()
+//        noteViewModel.addNote(
+//            Note(0, "Title", "Body")
+//        )
     }
 
     private fun renderState(state: NotesState) {
