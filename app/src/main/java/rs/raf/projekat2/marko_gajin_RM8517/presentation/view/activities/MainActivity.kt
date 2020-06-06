@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         lectureViewModel.lecturesState.observe(this, Observer {
             Timber.e(it.toString())
         })
+
         lectureViewModel.fetchLectures()
         lectureViewModel.getLectures()
     }
