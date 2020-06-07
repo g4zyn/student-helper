@@ -52,6 +52,18 @@ class NoteRepositoryImpl(
         return localDataSource.delete(id)
     }
 
+    override fun edit(note: Note): Completable {
+        return Completable.fromCallable {
+            val oldNote = localDataSource.getById(note.id)
+            val newNote = oldNote.copy(
+                id = note.id,
+                title = note.title,
+                body = note.body
+            )
+            localDataSource.update(newNote)
+        }
+    }
+
     override fun getNoteData(intent: Intent): Note? {
         return sharedDataSource.getNoteData(intent)
     }

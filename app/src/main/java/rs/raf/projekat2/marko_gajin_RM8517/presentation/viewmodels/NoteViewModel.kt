@@ -1,6 +1,7 @@
 package rs.raf.projekat2.marko_gajin_RM8517.presentation.viewmodels
 
 import android.content.Intent
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -89,6 +90,22 @@ class NoteViewModel(
                 }
             )
             subscriptions.add(subscription)
+    }
+
+    override fun editNote(note: Note) {
+        val subscription = noteRepository
+            .edit(note)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    Timber.e("UPDATED")
+                },
+                {
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
     }
 
     override fun deleteNote(note: Note) {

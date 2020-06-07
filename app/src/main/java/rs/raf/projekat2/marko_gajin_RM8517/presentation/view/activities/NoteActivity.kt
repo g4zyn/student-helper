@@ -38,13 +38,24 @@ class NoteActivity : AppCompatActivity(R.layout.activity_note) {
             finish()
         }
         saveBtn.setOnClickListener {
-            val newNote = Note(0, titleEt.text.toString(), bodyEt.text.toString())
+            val title = titleEt.text.toString()
+            val body = bodyEt.text.toString()
             if (note == null) {
-                noteViewModel.addNote(newNote)
+                newNote(title, body)
             } else {
-//                noteViewModel.editNote(newNote)
+                editNote(title, body)
             }
             finish()
         }
+    }
+
+    private fun newNote(title: String, body: String) {
+        val newNote = Note(0, title, body)
+        noteViewModel.addNote(newNote)
+    }
+
+    private fun editNote(title: String, body: String) {
+        val newNote = Note(note!!.id, title, body)
+        noteViewModel.editNote(newNote)
     }
 }
