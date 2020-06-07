@@ -11,12 +11,11 @@ import rs.raf.projekat2.marko_gajin_RM8517.R
 import rs.raf.projekat2.marko_gajin_RM8517.extensions.toPx
 import timber.log.Timber
 
-class SquareView : View{
+class SquareView : View {
 
-    constructor(context : Context) : super (context)
+    constructor(context: Context): super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context,attrs)
-    constructor(context: Context, attrs: AttributeSet?, deffStyleAttr : Int) : super(context,attrs,deffStyleAttr)
-
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr : Int) : super(context, attrs, defStyleAttr)
 
     private var rect : Rect = Rect()
     private var paint : Paint = Paint()
@@ -37,8 +36,7 @@ class SquareView : View{
         super.onDraw(canvas)
         Timber.e("On draw")
 
-        // Crtamo prvi bar
-
+        // 1st bar
         val left = 0
         val top = height / heightDivider
         val bottom = height
@@ -46,13 +44,11 @@ class SquareView : View{
 
         rect.set(left, bottom, right, top)
 
-        // Treba da ga obojimo
-
+        // Colors
         paint.isAntiAlias = true
         paint.style = Paint.Style.FILL
         paint.color = ContextCompat.getColor(context, R.color.colorAccent)
 
-
         canvas?.drawRect(rect, paint)
 
         paint.color = ContextCompat.getColor(context, R.color.colorPrimaryDark)
@@ -61,14 +57,12 @@ class SquareView : View{
 
         canvas?.drawRect(rect, paint)
 
-        //Crtamo drugi bar
-
-        val left2 = right
+//        2nd
         val top2 = height / heightDivider / 2
         val bottom2 = height
         val right2 = width * 2 / 5
 
-        rect.set(left2, top2, right2, bottom2)
+        rect.set(right, top2, right2, bottom2)
 
         paint.style = Paint.Style.FILL
         paint.color = ContextCompat.getColor(context, R.color.colorAccent)
@@ -80,14 +74,12 @@ class SquareView : View{
 
         canvas?.drawRect(rect, paint)
 
-        //Crtamo treci bar
-
-        val left3 = right2
+//        3rd
         val top3 = height / heightDivider / 3
         val bottom3 = height
         val right3 = width * 3 / 5
 
-        rect.set(left3, top3, right3, bottom3) // Ovo nam kaze gde cemo da iscrtamo
+        rect.set(right2, top3, right3, bottom3) // Ovo nam kaze gde cemo da iscrtamo
 
         // A sad treba da iscrtamo ili ti obojimo
         paint.style = Paint.Style.FILL

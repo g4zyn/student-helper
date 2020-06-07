@@ -21,23 +21,20 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
     }
 
     private fun init() {
-        initUi()
+        initObservers()
     }
 
-    private fun initUi() {
+    private fun initObservers() {
         noteViewModel.notesState.observe(viewLifecycleOwner, Observer {
-            val nSize = countSize(it)
-            squareView.heightDivider = nSize
+            squareView.heightDivider = countSize(it)
             squareView.invalidate()
         })
     }
 
-    private fun countSize(state : NotesState) : Int{
-        val count : Int = 0
+    private fun countSize(state: NotesState, count: Int = 0): Int {
         when(state){
             is NotesState.Success -> {
-                val count = state.notes.size
-                return count
+                return state.notes.size
             }
         }
         return count
