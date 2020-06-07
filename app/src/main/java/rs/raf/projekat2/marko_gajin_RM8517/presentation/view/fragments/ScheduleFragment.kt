@@ -66,7 +66,6 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule), AdapterView.OnIte
         }
         spinner.onItemSelectedListener = this
     }
-
     override fun onNothingSelected(parent: AdapterView<*>?) {
 //        TODO("Not yet implemented")
     }
