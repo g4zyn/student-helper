@@ -23,6 +23,8 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     private lateinit var adapter: NoteAdapter
 
+    private var switch = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
@@ -60,6 +62,10 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         addBtn.setOnClickListener {
             val intent = Intent(context, NoteActivity::class.java)
             startActivity(intent)
+        }
+        switchBtn.setOnClickListener {
+            switch = !switch
+            noteViewModel.getNotes(switch)
         }
     }
 

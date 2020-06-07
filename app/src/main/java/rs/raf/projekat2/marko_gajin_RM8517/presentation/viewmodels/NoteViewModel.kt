@@ -53,22 +53,39 @@ class NoteViewModel(
         subscriptions.add(subscription)
     }
 
-    override fun getNotes() {
-
-        val subscription = noteRepository
-            .getAll()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    notesState.value = NotesState.Success(it)
-                },
-                {
-                    notesState.value = NotesState.Error("Error happened while fetching data from database")
-                    Timber.e(it)
-                }
-            )
+    override fun getNotes(archived: Boolean) {
+        if (archived) {
+            val subscription = noteRepository
+                .getArchived()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        notesState.value = NotesState.Success(it)
+                    },
+                    {
+                        notesState.value = NotesState.Error("Error happened while fetching data from database")
+                        Timber.e(it)
+                    }
+                )
             subscriptions.add(subscription)
+        } else {
+            val subscription = noteRepository
+                .getAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        notesState.value = NotesState.Success(it)
+                    },
+                    {
+                        notesState.value = NotesState.Error("Error happened while fetching data from database")
+                        Timber.e(it)
+                    }
+                )
+            subscriptions.add(subscription)
+        }
+
     }
 
     override fun searchNotes(search: String) {

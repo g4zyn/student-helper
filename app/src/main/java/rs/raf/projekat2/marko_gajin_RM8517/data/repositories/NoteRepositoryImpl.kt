@@ -26,6 +26,14 @@ class NoteRepositoryImpl(
             }
     }
 
+    override fun getArchived(): Observable<List<Note>> {
+        return localDataSource
+            .getArchived()
+            .map{
+                noteMap(it)
+            }
+    }
+
     override fun getBySearch(search: String): Observable<List<Note>> {
         return localDataSource
             .getBySearch(search)
