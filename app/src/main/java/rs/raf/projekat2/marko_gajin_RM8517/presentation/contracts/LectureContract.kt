@@ -15,5 +15,7 @@ interface LectureContract {
         fun fetchLectures()
         fun getLectures()
         fun searchLectures(search: String)
+        fun getByDay(day: String)
+
     }
 }

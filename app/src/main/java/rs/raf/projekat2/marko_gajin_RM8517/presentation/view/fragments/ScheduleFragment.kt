@@ -8,6 +8,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_schedule.*
@@ -18,6 +19,7 @@ import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.recycler.adapters.S
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.LecturesState
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.viewmodels.LectureViewModel
 import timber.log.Timber
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 class ScheduleFragment : Fragment(R.layout.fragment_schedule), AdapterView.OnItemSelectedListener {
 
@@ -67,11 +69,16 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule), AdapterView.OnIte
         spinner.onItemSelectedListener = this
     }
     override fun onNothingSelected(parent: AdapterView<*>?) {
-//        TODO("Not yet implemented")
+        lectureViewModel.getLectures()
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val selected = parent?.getItemAtPosition(position)
+        val selected = parent?.getItemAtPosition(position).toString()
+        if (selected == "ALL") {
+            lectureViewModel.getLectures()
+        } else {
+            lectureViewModel.getByDay(selected)
+        }
     }
 
     private fun initObservers() {
@@ -98,11 +105,11 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule), AdapterView.OnIte
             }
             is  LecturesState.DataFetched -> {
                 showLoadingState(false)
-                Toast.makeText(context, "Fresh data fetched from the server", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "Fresh data fetched from the server", Toast.LENGTH_SHORT).show()
             }
             is LecturesState.Loading -> {
                 showLoadingState(true)
-                Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show()
             }
         }
     }

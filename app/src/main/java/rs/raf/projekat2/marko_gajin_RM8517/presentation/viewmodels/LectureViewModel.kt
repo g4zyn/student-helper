@@ -87,6 +87,22 @@ class LectureViewModel(
         subscriptions.add(subscription)
     }
 
+    override fun getByDay(day: String) {
+        val subscription = lectureRepository
+            .getByDay(day)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    lecturesState.value = LecturesState.Success(it)
+                },
+                {
+                    lecturesState.value = LecturesState.Error("Error happened while fetching data from database")
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
     override fun searchLectures(search: String) {
         publishSubject.onNext(search)
     }

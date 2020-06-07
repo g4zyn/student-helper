@@ -18,6 +18,9 @@ abstract class LectureDao {
     @Query("SELECT * FROM lectures WHERE name LIKE :search || '%' or professor LIKE :search || '%'")
     abstract fun getBySearch(search: String): Observable<List<LectureEntity>>
 
+    @Query("SELECT * FROM lectures WHERE day == :day")
+    abstract fun getByDay(day: String): Observable<List<LectureEntity>>
+
     @Query("DELETE FROM lectures")
     abstract fun deleteAll()
 

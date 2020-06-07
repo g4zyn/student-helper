@@ -75,4 +75,23 @@ class LectureRepositoryImpl(
             }
     }
 
+    override fun getByDay(day: String): Observable<List<Lecture>> {
+        return localDataSource
+            .getByDay(day)
+            .map {
+                it.map {
+                    Lecture(
+                        it.id,
+                        it.name,
+                        it.type,
+                        it.professor,
+                        it.groups,
+                        it.day,
+                        it.time,
+                        it.classroom
+                    )
+                }
+            }
+    }
+
 }
