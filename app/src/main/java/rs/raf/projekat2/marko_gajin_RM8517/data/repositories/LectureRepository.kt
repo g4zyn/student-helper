@@ -10,4 +10,5 @@ interface LectureRepository {
     fun getAll(): Observable<List<Lecture>>
     fun getBySearch(search: String): Observable<List<Lecture>>
     fun getByDay(day: String): Observable<List<Lecture>>
+    fun getByGroups(groups: String): Observable<List<Lecture>>
 }

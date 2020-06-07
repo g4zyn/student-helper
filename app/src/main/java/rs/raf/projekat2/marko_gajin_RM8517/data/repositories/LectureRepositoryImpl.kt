@@ -94,4 +94,22 @@ class LectureRepositoryImpl(
             }
     }
 
+    override fun getByGroups(groups: String): Observable<List<Lecture>> {
+        return localDataSource
+            .getByGroups(groups)
+            .map {
+                it.map {
+                    Lecture(
+                        it.id,
+                        it.name,
+                        it.type,
+                        it.professor,
+                        it.groups,
+                        it.day,
+                        it.time,
+                        it.classroom
+                    )
+                }
+            }
+    }
 }

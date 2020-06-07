@@ -54,6 +54,10 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule), AdapterView.OnIte
             val search = it.toString()
             lectureViewModel.searchLectures(search)
         }
+        groupEt.doAfterTextChanged {
+            val search = it.toString()
+            lectureViewModel.getByGroups(search)
+        }
     }
 
     private fun initSpinner() {

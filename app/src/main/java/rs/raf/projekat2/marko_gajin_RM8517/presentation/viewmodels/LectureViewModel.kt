@@ -103,6 +103,22 @@ class LectureViewModel(
         subscriptions.add(subscription)
     }
 
+    override fun getByGroups(groups: String) {
+        val subscription = lectureRepository
+            .getByGroups(groups)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    lecturesState.value = LecturesState.Success(it)
+                },
+                {
+                    lecturesState.value = LecturesState.Error("Error happened while fetching data from database")
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
     override fun searchLectures(search: String) {
         publishSubject.onNext(search)
     }

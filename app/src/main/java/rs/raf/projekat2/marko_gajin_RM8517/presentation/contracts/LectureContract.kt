@@ -16,6 +16,7 @@ interface LectureContract {
         fun getLectures()
         fun searchLectures(search: String)
         fun getByDay(day: String)
+        fun getByGroups(classroom: String)
 
     }
 }
