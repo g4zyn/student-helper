@@ -1,5 +1,6 @@
 package rs.raf.projekat2.marko_gajin_RM8517.presentation.contracts
 
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import rs.raf.projekat2.marko_gajin_RM8517.data.models.Note
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.AddNoteState
@@ -18,6 +19,8 @@ interface NoteContract {
         fun getNoteByTitle(title: String)
         fun addNote(note: Note)
         fun deleteNote(note: Note)
+        fun getNoteData(intent: Intent): Note?
+        fun setNoteData(note: Note, intent: Intent)
     }
 
 }

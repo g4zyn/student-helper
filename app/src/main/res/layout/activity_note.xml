@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="rs.raf.projekat2.marko_gajin_RM8517.presentation.view.activities.NewNoteActivity">
+    tools:context="rs.raf.projekat2.marko_gajin_RM8517.presentation.view.activities.NoteActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayout"

@@ -1,5 +1,6 @@
 package rs.raf.projekat2.marko_gajin_RM8517.presentation.viewmodels
 
+import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -105,6 +106,14 @@ class NoteViewModel(
                 }
             )
         subscriptions.add(subscription)
+    }
+
+    override fun getNoteData(intent: Intent): Note? {
+        return noteRepository.getNoteData(intent)
+    }
+
+    override fun setNoteData(note: Note, intent: Intent) {
+        noteRepository.setNoteData(note, intent)
     }
 
     override fun onCleared() {

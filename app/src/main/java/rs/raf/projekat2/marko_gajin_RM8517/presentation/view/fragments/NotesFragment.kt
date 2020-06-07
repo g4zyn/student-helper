@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_notes.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import rs.raf.projekat2.marko_gajin_RM8517.R
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.contracts.NoteContract
-import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.activities.NewNoteActivity
+import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.activities.NoteActivity
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.recycler.adapters.NoteAdapter
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.NotesState
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.viewmodels.NoteViewModel
@@ -42,7 +42,11 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         listRv.layoutManager = LinearLayoutManager(context)
         adapter = NoteAdapter(
             {noteViewModel.deleteNote(it)},
-            {},
+            {
+                val intent = Intent(context, NoteActivity::class.java)
+                noteViewModel.setNoteData(it, intent)
+                startActivity(intent)
+            },
             {}
         )
         listRv.adapter = adapter
@@ -54,7 +58,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
             noteViewModel.getNoteByTitle(filter)
         }
         addBtn.setOnClickListener {
-            val intent = Intent(context, NewNoteActivity::class.java)
+            val intent = Intent(context, NoteActivity::class.java)
             startActivity(intent)
         }
     }
