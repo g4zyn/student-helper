@@ -17,7 +17,7 @@ class UserSharedPreference(private val sharedPreference: SharedPreferences) : Us
     override fun setUser(user: User) {
         val editor = sharedPreference.edit()
         editor.putString(USER_KEY, user.username)
-        editor.commit()
+        editor.apply()
     }
 
     override fun removeUser() {
