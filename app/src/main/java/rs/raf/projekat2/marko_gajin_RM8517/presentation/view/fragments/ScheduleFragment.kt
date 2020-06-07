@@ -3,6 +3,7 @@ package rs.raf.projekat2.marko_gajin_RM8517.presentation.view.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,7 +44,10 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
     }
 
     private fun initListeners() {
-//        TODO implement listeners
+        searchEt.doAfterTextChanged {
+            val search = it.toString()
+            lectureViewModel.searchLectures(search)
+        }
     }
 
     private fun initObservers() {

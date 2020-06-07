@@ -8,5 +8,5 @@ interface LectureRepository {
 
     fun fetchAll(): Observable<Resource<Unit>>
     fun getAll(): Observable<List<Lecture>>
-//    TODO addLecture method
+    fun getBySearch(search: String): Observable<List<Lecture>>
 }

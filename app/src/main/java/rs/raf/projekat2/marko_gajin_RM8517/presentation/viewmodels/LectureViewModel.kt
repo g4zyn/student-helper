@@ -12,6 +12,7 @@ import rs.raf.projekat2.marko_gajin_RM8517.presentation.contracts.LectureContrac
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.AddLectureState
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.LecturesState
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 class LectureViewModel(
     private val lectureRepository: LectureRepository
@@ -23,7 +24,31 @@ class LectureViewModel(
 
     private val publishSubject: PublishSubject<String> = PublishSubject.create()
 
-    init { }
+    init {
+        val subscription = publishSubject
+            .debounce(200, TimeUnit.MILLISECONDS)
+            .distinctUntilChanged()
+            .switchMap {
+                lectureRepository
+                    .getBySearch(it)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnError {
+                        Timber.e("Error in publish subject")
+                        Timber.e(it)
+                    }
+            }
+            .subscribe(
+                {
+                    lecturesState.value = LecturesState.Success(it)
+                },
+                {
+                    lecturesState.value = LecturesState.Error("Error happened while fetching data from database")
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
+    }
 
     override fun fetchLectures() {
         val subscription = lectureRepository
@@ -60,6 +85,10 @@ class LectureViewModel(
                 }
             )
         subscriptions.add(subscription)
+    }
+
+    override fun searchLectures(search: String) {
+        publishSubject.onNext(search)
     }
 
     override fun onCleared() {

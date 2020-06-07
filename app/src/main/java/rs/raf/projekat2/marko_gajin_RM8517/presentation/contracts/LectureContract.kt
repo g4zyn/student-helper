@@ -14,6 +14,6 @@ interface LectureContract {
 
         fun fetchLectures()
         fun getLectures()
-//        TODO addLecture method
+        fun searchLectures(search: String)
     }
 }

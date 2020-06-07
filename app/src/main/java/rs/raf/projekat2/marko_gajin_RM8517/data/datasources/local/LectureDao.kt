@@ -15,6 +15,9 @@ abstract class LectureDao {
     @Query("SELECT * FROM lectures")
     abstract fun getAll(): Observable<List<LectureEntity>>
 
+    @Query("SELECT * FROM lectures WHERE name LIKE :search || '%' or professor LIKE :search || '%'")
+    abstract fun getBySearch(search: String): Observable<List<LectureEntity>>
+
     @Query("DELETE FROM lectures")
     abstract fun deleteAll()
 
@@ -24,5 +27,4 @@ abstract class LectureDao {
         insertLectures(entities).blockingAwait()
     }
 
-//    TODO get filtered
 }

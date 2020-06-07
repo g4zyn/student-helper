@@ -56,4 +56,23 @@ class LectureRepositoryImpl(
             }
     }
 
+    override fun getBySearch(search: String): Observable<List<Lecture>> {
+        return localDataSource
+            .getBySearch(search)
+            .map {
+                it.map {
+                    Lecture(
+                        it.id,
+                        it.name,
+                        it.type,
+                        it.professor,
+                        it.groups,
+                        it.day,
+                        it.time,
+                        it.classroom
+                    )
+                }
+            }
+    }
+
 }
