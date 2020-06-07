@@ -67,11 +67,13 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule), AdapterView.OnIte
         spinner.onItemSelectedListener = this
     }
 
-    override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-        val selected = parent.getItemAtPosition(position)
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+//        TODO("Not yet implemented")
     }
 
-    override fun onNothingSelected(parent: AdapterView<*>) {}
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val selected = parent?.getItemAtPosition(position)
+    }
 
     private fun initObservers() {
 
