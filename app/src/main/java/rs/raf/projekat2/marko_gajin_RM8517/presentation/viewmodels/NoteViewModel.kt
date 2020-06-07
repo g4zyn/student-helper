@@ -13,6 +13,7 @@ import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.AddNoteState
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.DeleteNoteState
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.NotesState
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 
 class NoteViewModel(
     private val noteRepository: NoteRepository
@@ -25,7 +26,30 @@ class NoteViewModel(
 
     private val publishSubject: PublishSubject<String> = PublishSubject.create()
 
-    init {}
+    init {
+        val subscription = publishSubject
+            .debounce(200, TimeUnit.MILLISECONDS)
+            .switchMap {
+                noteRepository
+                    .getByTitle(it)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnError {
+                        Timber.e("Error in publish subject")
+                        Timber.e(it)
+                    }
+            }
+            .subscribe(
+                {
+                    notesState.value = NotesState.Success(it)
+                },
+                {
+                    notesState.value = NotesState.Error("Error happened while fetching data from database")
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
+    }
 
     override fun getNotes() {
 
@@ -43,6 +67,10 @@ class NoteViewModel(
                 }
             )
             subscriptions.add(subscription)
+    }
+
+    override fun getNoteByTitle(title: String) {
+        publishSubject.onNext(title)
     }
 
     override fun addNote(note: Note) {

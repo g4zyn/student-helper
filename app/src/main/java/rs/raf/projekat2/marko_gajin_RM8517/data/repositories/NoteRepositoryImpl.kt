@@ -22,6 +22,20 @@ class NoteRepositoryImpl(private val localDataSource: NoteDao) : NoteRepository 
             }
     }
 
+    override fun getByTitle(title: String): Observable<List<Note>> {
+        return localDataSource
+            .getByTitle(title)
+            .map {
+                it.map {
+                    Note(
+                        it.id,
+                        it.title,
+                        it.body
+                    )
+                }
+            }
+    }
+
     override fun insert(note: Note): Completable {
         val noteEntity = NoteEntity(note.id, note.title, note.body)
 

@@ -7,7 +7,7 @@ import rs.raf.projekat2.marko_gajin_RM8517.data.models.Note
 interface NoteRepository {
 
     fun getAll(): Observable<List<Note>>
-//    TODO get filtered
+    fun getByTitle(title: String): Observable<List<Note>>
     fun insert(note: Note): Completable
     fun delete(id: Long): Completable
 
