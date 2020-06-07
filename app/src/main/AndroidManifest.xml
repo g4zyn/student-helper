@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presentation.view.activities.EditNoteActivity"></activity>
+        <activity android:name=".presentation.view.activities.LoginActivity"></activity>
+        <activity android:name=".presentation.view.activities.EditNoteActivity" />
         <activity android:name=".presentation.view.activities.NoteActivity" />
         <activity android:name=".presentation.view.activities.SplashActivity">
             <intent-filter>

@@ -11,6 +11,7 @@ import org.koin.core.logger.Level
 import rs.raf.projekat2.marko_gajin_RM8517.modules.coreModule
 import rs.raf.projekat2.marko_gajin_RM8517.modules.lectureModule
 import rs.raf.projekat2.marko_gajin_RM8517.modules.noteModule
+import rs.raf.projekat2.marko_gajin_RM8517.modules.userModule
 import timber.log.Timber
 
 class StudentHelperApplication : Application() {
@@ -34,7 +35,8 @@ class StudentHelperApplication : Application() {
         val modules = listOf(
             coreModule,
             lectureModule,
-            noteModule
+            noteModule,
+            userModule
         )
         startKoin {
             androidLogger(Level.DEBUG)
