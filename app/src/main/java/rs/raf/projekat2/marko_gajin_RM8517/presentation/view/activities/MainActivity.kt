@@ -36,6 +36,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 R.id.notesNav -> {
                     viewPager.setCurrentItem(NavigationAdapter.FRAGMENT_NOTES, false)
                 }
+                R.id.statsNav -> {
+                    viewPager.setCurrentItem(NavigationAdapter.FRAGMENT_STATS, false)
+                }
                 R.id.profileNav -> {
                     viewPager.setCurrentItem(NavigationAdapter.FRAGMENT_PROFILE, false)
                 }

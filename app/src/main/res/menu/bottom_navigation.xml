@@ -11,6 +11,11 @@
         android:title="@string/notes" />
 
     <item
+        android:id="@+id/statsNav"
+        android:icon="@drawable/ic_baseline_bar_chart_24"
+        android:title="STATS" />
+
+    <item
         android:id="@+id/profileNav"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/profile" />
