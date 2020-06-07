@@ -50,12 +50,12 @@ class NoteActivity : AppCompatActivity(R.layout.activity_note) {
     }
 
     private fun newNote(title: String, body: String) {
-        val newNote = Note(0, title, body)
+        val newNote = Note(0, title, body, false)
         noteViewModel.addNote(newNote)
     }
 
     private fun editNote(title: String, body: String) {
-        val newNote = Note(note!!.id, title, body)
+        val newNote = Note(note!!.id, title, body, false)
         noteViewModel.editNote(newNote)
     }
 }

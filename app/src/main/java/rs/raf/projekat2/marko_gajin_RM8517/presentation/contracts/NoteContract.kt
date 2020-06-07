@@ -19,6 +19,7 @@ interface NoteContract {
         fun searchNotes(search: String)
         fun addNote(note: Note)
         fun editNote(note: Note)
+        fun archiveNote(note: Note)
         fun deleteNote(note: Note)
         fun getNoteData(intent: Intent): Note?
         fun setNoteData(note: Note, intent: Intent)

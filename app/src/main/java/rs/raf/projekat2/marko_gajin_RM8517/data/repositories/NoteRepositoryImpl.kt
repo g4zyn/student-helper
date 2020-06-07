@@ -14,17 +14,15 @@ class NoteRepositoryImpl(
     private val sharedDataSource: NoteDataSource
 ) : NoteRepository {
 
+    private val noteMap = {
+        entities: List<NoteEntity> -> entities.map { Note(it.id, it.title, it.body, it.archived) }
+    }
+
     override fun getAll(): Observable<List<Note>> {
         return localDataSource
             .getAll()
-            .map {
-                it.map {
-                    Note(
-                        it.id,
-                        it.title,
-                        it.body
-                    )
-                }
+            .map{
+                noteMap(it)
             }
     }
 
@@ -32,18 +30,12 @@ class NoteRepositoryImpl(
         return localDataSource
             .getBySearch(search)
             .map {
-                it.map {
-                    Note(
-                        it.id,
-                        it.title,
-                        it.body
-                    )
-                }
+                noteMap(it)
             }
     }
 
     override fun insert(note: Note): Completable {
-        val noteEntity = NoteEntity(note.id, note.title, note.body)
+        val noteEntity = NoteEntity(note.id, note.title, note.body, false)
 
         return localDataSource.insert(noteEntity)
     }

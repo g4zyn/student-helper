@@ -75,6 +75,10 @@ class NoteViewModel(
         publishSubject.onNext(search)
     }
 
+    override fun archiveNote(note: Note) {
+        TODO("Not yet implemented")
+    }
+
     override fun addNote(note: Note) {
         val subscription = noteRepository
             .insert(note)
