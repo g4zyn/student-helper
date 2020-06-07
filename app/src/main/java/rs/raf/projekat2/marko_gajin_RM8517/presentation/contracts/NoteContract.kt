@@ -16,7 +16,7 @@ interface NoteContract {
         val deleteDone: LiveData<DeleteNoteState>
 
         fun getNotes()
-        fun getNoteByTitle(title: String)
+        fun searchNotes(search: String)
         fun addNote(note: Note)
         fun editNote(note: Note)
         fun deleteNote(note: Note)

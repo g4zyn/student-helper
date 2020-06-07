@@ -28,9 +28,9 @@ class NoteRepositoryImpl(
             }
     }
 
-    override fun getByTitle(title: String): Observable<List<Note>> {
+    override fun getBySearch(search: String): Observable<List<Note>> {
         return localDataSource
-            .getByTitle(title)
+            .getBySearch(search)
             .map {
                 it.map {
                     Note(

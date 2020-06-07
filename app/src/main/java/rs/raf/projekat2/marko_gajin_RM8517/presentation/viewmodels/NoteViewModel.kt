@@ -33,7 +33,7 @@ class NoteViewModel(
             .debounce(200, TimeUnit.MILLISECONDS)
             .switchMap {
                 noteRepository
-                    .getByTitle(it)
+                    .getBySearch(it)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnError {
@@ -71,8 +71,8 @@ class NoteViewModel(
             subscriptions.add(subscription)
     }
 
-    override fun getNoteByTitle(title: String) {
-        publishSubject.onNext(title)
+    override fun searchNotes(search: String) {
+        publishSubject.onNext(search)
     }
 
     override fun addNote(note: Note) {

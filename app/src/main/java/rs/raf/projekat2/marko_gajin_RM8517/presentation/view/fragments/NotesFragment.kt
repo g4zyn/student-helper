@@ -54,8 +54,8 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     private fun initListeners() {
         searchEt.doAfterTextChanged {
-            val filter = it.toString()
-            noteViewModel.getNoteByTitle(filter)
+            val search = it.toString()
+            noteViewModel.searchNotes(search)
         }
         addBtn.setOnClickListener {
             val intent = Intent(context, NoteActivity::class.java)
