@@ -2,6 +2,9 @@ package rs.raf.projekat2.marko_gajin_RM8517.presentation.view.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -16,7 +19,7 @@ import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.LecturesStat
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.viewmodels.LectureViewModel
 import timber.log.Timber
 
-class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
+class ScheduleFragment : Fragment(R.layout.fragment_schedule), AdapterView.OnItemSelectedListener {
 
     private val lectureViewModel: LectureContract.ViewModel by sharedViewModel<LectureViewModel>()
 
@@ -33,6 +36,7 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
     }
 
     private fun initUi() {
+        initSpinner()
         initRecycler()
         initListeners()
     }
@@ -49,6 +53,25 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
             lectureViewModel.searchLectures(search)
         }
     }
+
+    private fun initSpinner() {
+        val spinner: Spinner = day_spinner
+        ArrayAdapter.createFromResource(
+            this.requireContext(),
+            R.array.days_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
+        spinner.onItemSelectedListener = this
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+        val selected = parent.getItemAtPosition(position)
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>) {}
 
     private fun initObservers() {
 
