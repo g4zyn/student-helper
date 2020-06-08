@@ -20,6 +20,9 @@ abstract class NoteDao {
     @Query("SELECT * FROM notes WHERE archived == :archived")
     abstract fun getArchived(archived: Boolean = true): Observable<List<NoteEntity>>
 
+    @Query("SELECT * FROM notes WHERE archived == :archived")
+    abstract fun hideArchived(archived: Boolean = false): Observable<List<NoteEntity>>
+
     @Query("SELECT * FROM notes WHERE id == :id")
     abstract fun getById(id: Long): NoteEntity
 

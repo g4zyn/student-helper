@@ -35,6 +35,14 @@ class NoteRepositoryImpl(
             }
     }
 
+    override fun hideArchived(): Observable<List<Note>> {
+        return localDataSource
+            .hideArchived()
+            .map {
+                noteMap(it)
+            }
+    }
+
     override fun getBySearch(search: String): Observable<List<Note>> {
         return localDataSource
             .getBySearch(search)
