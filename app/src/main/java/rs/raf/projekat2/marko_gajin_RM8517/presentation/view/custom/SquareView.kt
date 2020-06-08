@@ -47,7 +47,7 @@ class SquareView : View {
         // Colors
         paint.isAntiAlias = true
         paint.style = Paint.Style.FILL
-        paint.color = ContextCompat.getColor(context, R.color.colorAccent)
+        paint.color = ContextCompat.getColor(context, R.color.colorPrimary)
 
         canvas?.drawRect(rect, paint)
 
@@ -65,7 +65,7 @@ class SquareView : View {
         rect.set(right, top2, right2, bottom2)
 
         paint.style = Paint.Style.FILL
-        paint.color = ContextCompat.getColor(context, R.color.colorAccent)
+        paint.color = ContextCompat.getColor(context, R.color.colorPrimary)
 
         canvas?.drawRect(rect, paint)
         paint.color = ContextCompat.getColor(context, R.color.colorPrimaryDark)
@@ -83,7 +83,7 @@ class SquareView : View {
 
         // A sad treba da iscrtamo ili ti obojimo
         paint.style = Paint.Style.FILL
-        paint.color = ContextCompat.getColor(context, R.color.colorAccent)
+        paint.color = ContextCompat.getColor(context, R.color.colorPrimary)
 
         canvas?.drawRect(rect, paint)
 
@@ -104,7 +104,7 @@ class SquareView : View {
 
         // A sad treba da iscrtamo ili ti obojimo
         paint.style = Paint.Style.FILL
-        paint.color = ContextCompat.getColor(context, R.color.colorAccent)
+        paint.color = ContextCompat.getColor(context, R.color.colorPrimary)
 
         canvas?.drawRect(rect, paint)
 
@@ -125,7 +125,7 @@ class SquareView : View {
 
         // A sad treba da iscrtamo ili ti obojimo
         paint.style = Paint.Style.FILL
-        paint.color = ContextCompat.getColor(context, R.color.colorAccent)
+        paint.color = ContextCompat.getColor(context, R.color.colorPrimary)
 
         canvas?.drawRect(rect, paint)
 

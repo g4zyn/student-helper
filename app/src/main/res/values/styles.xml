@@ -12,11 +12,13 @@
     <style name="TextViewStyle">
         <item name="android:textSize">20sp</item>
         <item name="android:textAlignment">center</item>
+        <item name="textAllCaps">true</item>
     </style>
 
     <style name="SpinnerStyle">
         <item name="android:layout_marginTop">15dp</item>
         <item name="android:layout_marginBottom">15dp</item>
+        <item name="backgroundColor">@color/material_on_surface_disabled</item>
     </style>
 
 </resources>
