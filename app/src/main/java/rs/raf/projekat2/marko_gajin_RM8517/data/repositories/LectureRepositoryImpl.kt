@@ -13,6 +13,21 @@ class LectureRepositoryImpl(
     private val remoteDataSource: LectureService
 ): LectureRepository {
 
+    private val lectureMap = { entities: List<LectureEntity> ->
+         entities.map {
+            Lecture(
+                it.id,
+                it.name,
+                it.type,
+                it.professor,
+                it.groups,
+                it.day,
+                it.time,
+                it.classroom
+            )
+         }
+    }
+
     override fun fetchAll(): Observable<Resource<Unit>> {
         return remoteDataSource
             .getAll()
@@ -41,37 +56,19 @@ class LectureRepositoryImpl(
         return localDataSource
             .getAll()
             .map {
-                it.map {
-                    Lecture(
-                        it.id,
-                        it.name,
-                        it.type,
-                        it.professor,
-                        it.groups,
-                        it.day,
-                        it.time,
-                        it.classroom
-                    )
-                }
+                lectureMap(it)
             }
+    }
+
+    override fun getFiltered(): Observable<List<Lecture>> {
+        TODO("Not yet implemented")
     }
 
     override fun getBySearch(search: String): Observable<List<Lecture>> {
         return localDataSource
             .getBySearch(search)
             .map {
-                it.map {
-                    Lecture(
-                        it.id,
-                        it.name,
-                        it.type,
-                        it.professor,
-                        it.groups,
-                        it.day,
-                        it.time,
-                        it.classroom
-                    )
-                }
+                lectureMap(it)
             }
     }
 
@@ -79,18 +76,7 @@ class LectureRepositoryImpl(
         return localDataSource
             .getByDay(day)
             .map {
-                it.map {
-                    Lecture(
-                        it.id,
-                        it.name,
-                        it.type,
-                        it.professor,
-                        it.groups,
-                        it.day,
-                        it.time,
-                        it.classroom
-                    )
-                }
+                lectureMap(it)
             }
     }
 
@@ -98,18 +84,7 @@ class LectureRepositoryImpl(
         return localDataSource
             .getByGroups(groups)
             .map {
-                it.map {
-                    Lecture(
-                        it.id,
-                        it.name,
-                        it.type,
-                        it.professor,
-                        it.groups,
-                        it.day,
-                        it.time,
-                        it.classroom
-                    )
-                }
+                lectureMap(it)
             }
     }
 }
