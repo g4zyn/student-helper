@@ -16,6 +16,7 @@ import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.activities.NoteActi
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.recycler.adapters.NoteAdapter
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.view.states.NotesState
 import rs.raf.projekat2.marko_gajin_RM8517.presentation.viewmodels.NoteViewModel
+import timber.log.Timber
 
 class NotesFragment : Fragment(R.layout.fragment_notes) {
 
@@ -43,13 +44,13 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     private fun initRecycler() {
         listRv.layoutManager = LinearLayoutManager(context)
         adapter = NoteAdapter(
-            {noteViewModel.deleteNote(it)},
+            { noteViewModel.deleteNote(it) },
             {
                 val intent = Intent(context, NoteActivity::class.java)
                 noteViewModel.setNoteData(it, intent)
                 startActivity(intent)
             },
-            {}
+            { noteViewModel.archiveNote(it) }
         )
         listRv.adapter = adapter
     }
@@ -71,6 +72,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     private fun initObservers() {
         noteViewModel.notesState.observe(viewLifecycleOwner, Observer {
+            Timber.e("Note - $it")
             renderState(it)
         })
         noteViewModel.getNotes()

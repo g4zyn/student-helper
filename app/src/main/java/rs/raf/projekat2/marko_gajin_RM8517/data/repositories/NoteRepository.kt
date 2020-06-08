@@ -13,6 +13,7 @@ interface NoteRepository {
     fun insert(note: Note): Completable
     fun delete(id: Long): Completable
     fun edit(note: Note): Completable
+    fun archive(note: Note): Completable
     fun getNoteData(intent: Intent): Note?
     fun setNoteData(note: Note, intent: Intent)
 

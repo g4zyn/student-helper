@@ -56,9 +56,18 @@ class NoteRepositoryImpl(
         return Completable.fromCallable {
             val oldNote = localDataSource.getById(note.id)
             val newNote = oldNote.copy(
-                id = note.id,
                 title = note.title,
                 body = note.body
+            )
+            localDataSource.update(newNote)
+        }
+    }
+
+    override fun archive(note: Note): Completable {
+        return Completable.fromCallable {
+            val oldNote = localDataSource.getById(note.id)
+            val newNote = oldNote.copy(
+                archived = !oldNote.archived
             )
             localDataSource.update(newNote)
         }

@@ -92,10 +92,6 @@ class NoteViewModel(
         publishSubject.onNext(search)
     }
 
-    override fun archiveNote(note: Note) {
-        TODO("Not yet implemented")
-    }
-
     override fun addNote(note: Note) {
         val subscription = noteRepository
             .insert(note)
@@ -121,6 +117,22 @@ class NoteViewModel(
             .subscribe(
                 {
                     Timber.e("UPDATED")
+                },
+                {
+                    Timber.e(it)
+                }
+            )
+        subscriptions.add(subscription)
+    }
+
+    override fun archiveNote(note: Note) {
+        val subscription = noteRepository
+            .archive(note)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    Timber.e("ARCHIVED")
                 },
                 {
                     Timber.e(it)
