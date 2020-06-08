@@ -27,6 +27,10 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule), AdapterView.OnIte
 
     private lateinit var adapter: ScheduleAdapter
 
+    private var day = "PON"
+    private var groups = ""
+    private var search = ""
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
@@ -51,12 +55,12 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule), AdapterView.OnIte
 
     private fun initListeners() {
         searchEt.doAfterTextChanged {
-            val search = it.toString()
-            lectureViewModel.searchLectures(search)
+            search = it.toString()
+            lectureViewModel.getLectures(search, groups, day)
         }
         groupEt.doAfterTextChanged {
-            val search = it.toString()
-            lectureViewModel.getByGroups(search)
+            groups = it.toString()
+            lectureViewModel.getLectures(search, groups, day)
         }
     }
 
@@ -72,17 +76,12 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule), AdapterView.OnIte
         }
         spinner.onItemSelectedListener = this
     }
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-        lectureViewModel.getLectures()
-    }
+    override fun onNothingSelected(parent: AdapterView<*>?) {}
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val selected = parent?.getItemAtPosition(position).toString()
-        if (selected == "ALL") {
-            lectureViewModel.getLectures()
-        } else {
-            lectureViewModel.getByDay(selected)
-        }
+        val selected = parent?.getItemAtPosition(position)
+        day = selected.toString()
+        lectureViewModel.getLectures(searchEt.text.toString(), groupEt.text.toString(), day)
     }
 
     private fun initObservers() {
@@ -93,7 +92,7 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule), AdapterView.OnIte
         })
 
         lectureViewModel.fetchLectures()
-        lectureViewModel.getLectures()
+        lectureViewModel.getLectures(search, groups, day)
     }
 
     private fun renderState(state: LecturesState) {

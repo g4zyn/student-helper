@@ -71,41 +71,9 @@ class LectureViewModel(
         subscriptions.add(subscription)
     }
 
-    override fun getLectures() {
+    override fun getLectures(search: String, groups: String, day: String) {
         val subscription = lectureRepository
-            .getAll()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    lecturesState.value = LecturesState.Success(it)
-                },
-                {
-                    lecturesState.value = LecturesState.Error("Error happened while fetching data from database")
-                }
-            )
-        subscriptions.add(subscription)
-    }
-
-    override fun getByDay(day: String) {
-        val subscription = lectureRepository
-            .getByDay(day)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    lecturesState.value = LecturesState.Success(it)
-                },
-                {
-                    lecturesState.value = LecturesState.Error("Error happened while fetching data from database")
-                }
-            )
-        subscriptions.add(subscription)
-    }
-
-    override fun getByGroups(groups: String) {
-        val subscription = lectureRepository
-            .getByGroups(groups)
+            .getFiltered(search, groups, day)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

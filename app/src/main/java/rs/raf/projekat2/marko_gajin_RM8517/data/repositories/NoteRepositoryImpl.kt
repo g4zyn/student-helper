@@ -6,6 +6,7 @@ import io.reactivex.Observable
 import rs.raf.projekat2.marko_gajin_RM8517.data.datasources.local.NoteDao
 import rs.raf.projekat2.marko_gajin_RM8517.data.datasources.shared.NoteDataSource
 import rs.raf.projekat2.marko_gajin_RM8517.data.datasources.shared.NoteIntentDataSource
+import rs.raf.projekat2.marko_gajin_RM8517.data.models.Lecture
 import rs.raf.projekat2.marko_gajin_RM8517.data.models.Note
 import rs.raf.projekat2.marko_gajin_RM8517.data.models.NoteEntity
 

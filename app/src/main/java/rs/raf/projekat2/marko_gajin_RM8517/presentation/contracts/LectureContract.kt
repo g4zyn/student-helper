@@ -13,10 +13,8 @@ interface LectureContract {
         val addDone: LiveData<AddLectureState>
 
         fun fetchLectures()
-        fun getLectures()
+        fun getLectures(search: String, groups: String, day: String)
         fun searchLectures(search: String)
-        fun getByDay(day: String)
-        fun getByGroups(classroom: String)
 
     }
 }

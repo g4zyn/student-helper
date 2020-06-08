@@ -52,16 +52,14 @@ class LectureRepositoryImpl(
             }
     }
 
-    override fun getAll(): Observable<List<Lecture>> {
+    override fun getFiltered(search: String, groups: String, day: String): Observable<List<Lecture>> {
         return localDataSource
-            .getAll()
+            .getBySearch(search)
             .map {
-                lectureMap(it)
+                lectureMap(it).filter { lecture: Lecture ->
+                    lecture.groups.contains(groups) && lecture.day == day
+                }
             }
-    }
-
-    override fun getFiltered(): Observable<List<Lecture>> {
-        TODO("Not yet implemented")
     }
 
     override fun getBySearch(search: String): Observable<List<Lecture>> {
@@ -72,19 +70,4 @@ class LectureRepositoryImpl(
             }
     }
 
-    override fun getByDay(day: String): Observable<List<Lecture>> {
-        return localDataSource
-            .getByDay(day)
-            .map {
-                lectureMap(it)
-            }
-    }
-
-    override fun getByGroups(groups: String): Observable<List<Lecture>> {
-        return localDataSource
-            .getByGroups(groups)
-            .map {
-                lectureMap(it)
-            }
-    }
 }

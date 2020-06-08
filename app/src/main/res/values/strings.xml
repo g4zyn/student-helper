@@ -1,6 +1,6 @@
 <resources>
     <string-array name="days_array">
-        <item>ALL</item>
+<!--        <item>ALL</item>-->
         <item>PON</item>
         <item>UTO</item>
         <item>SRE</item>
