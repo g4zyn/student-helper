@@ -13,6 +13,10 @@ class UserViewModel(
         return (userRepository.getUser() != null)
     }
 
+    override fun getUser(): User? {
+        return userRepository.getUser()
+    }
+
     override fun login(username: String, password: String): Boolean {
         val user = User(username)
         if (user.password == password) {
